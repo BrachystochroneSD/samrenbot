@@ -1,3 +1,6 @@
 # SAMRENBOT
 
 Simple python IRC bot for minitel chat setup in twitch.tv/samrenfou
+
+
+TODO: Check here to make it asynchronous: https://dev.to/ninjabunny9000/let-s-make-a-twitch-bot-with-python-2nd8
