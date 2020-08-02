@@ -1,7 +1,5 @@
 import requests
-
-clientid = '9wba9dk3evmmlxs2xz0xwle0fwr6uc'
-oauth_token = 'Bearer ub7h6xabxcpv16edszfyp527pbptqd'
+from credentials import *
 
 url = 'https://api.twitch.tv/helix/webhooks/hub/'
 payload = {"hub.mode":"subscribe",
