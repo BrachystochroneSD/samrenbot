@@ -1,15 +1,28 @@
 import requests
-from credentials import *
 
-url = 'https://api.twitch.tv/helix/webhooks/hub/'
-payload = {"hub.mode":"subscribe",
-           "hub.topic":"https://api.twitch.tv/helix/users/follows?first=1&to_id=51393318",
-           "hub.callback":"http://www.zenocyne.com:5000/TwitchAlert",
-           "hub.lease_seconds":"864000"
-}
+class Follow_Subscriptions:
+    def __init__(self, channel_id, client_id, lease_seconds = 864000, callback_url, oauth_token):
+        self.channel_id = channel_id
+        self.client_id = client_id
+        self.oauth_token = oauth_token
+        self.lease_seconds = lease_seconds
+        self.callback_url = callback_url
+        self.url = 'https://api.twitch.tv/helix/webhooks/hub/'
 
-header = {'Client-ID': clientid, 'Authorization': oauth_token}
+    def subscribe(self):
+        header = {
+            'Client-ID': self.client_id,
+            'Authorization': self.oauth_token
+        }
 
-req = requests.post(url, headers = header, data = payload)
-print(req)
-print(req.text)
+        payload = {
+            "hub.mode" : "subscribe",
+            "hub.topic" : "https://api.twitch.tv/helix/users/follows?first=1&to_id=" + self.channel_id,
+            "hub.callback" : self.callback_url
+            "hub.lease_seconds": self.lease_seconds
+        }
+
+        req = requests.post(url, headers = header, data = payload)
+
+        print(req)
+        print(req.text)
