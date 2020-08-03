@@ -16,10 +16,9 @@ BOTPASS = config['IRC']['BOTPASS']
 CHANNEL = config['IRC']['CHANNEL']
 SERVER = config['IRC']['SERVER']
 
-
-
 irc=ic.IRC()
 irc.connect(SERVER, PORT, CHANNEL, BOTNICK, BOTPASS)
+follower_file = open('twitch_alerts/follow_alert.txt', 'r')
 
 while True:
     text = irc.get_response()
