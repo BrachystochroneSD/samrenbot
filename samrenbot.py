@@ -16,12 +16,17 @@ BOTPASS = config['IRC']['BOTPASS']
 CHANNEL = config['IRC']['CHANNEL']
 SERVER = config['IRC']['SERVER']
 
+client_id = config['TwitchAlert']['client_id']
+oauth_token = config['TwitchAlert']['oauth_token']
+channel_id = config['TwitchAlert']['channel_id']
+callback_url = config['TwitchAlert']['callback_url']
+
 # IRC
 irc = ic.IRC()
 irc.connect(SERVER, PORT, CHANNEL, BOTNICK, BOTPASS)
 
 # Subscription to twitch follow alert
-follow_subs = Follow_Subscription(channel_id, client_id, lease_seconds, callback_url, oauth_token)
+follow_subs = Follow_Subscription(channel_id, client_id, callback_url, oauth_token)
 
 # Minitel
 minylpg = miny.MinYLPG()

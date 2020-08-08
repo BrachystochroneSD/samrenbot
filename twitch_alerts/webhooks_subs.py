@@ -1,11 +1,11 @@
 import requests
 
 class Follow_Subscriptions:
-    def __init__(self, channel_id, client_id, lease_seconds = 864000, callback_url, oauth_token):
+    def __init__(self, channel_id, client_id, callback_url, oauth_token):
         self.channel_id = channel_id
         self.client_id = client_id
         self.oauth_token = oauth_token
-        self.lease_seconds = lease_seconds
+        self.lease_seconds = 864000
         self.callback_url = callback_url
         self.url = 'https://api.twitch.tv/helix/webhooks/hub/'
 
