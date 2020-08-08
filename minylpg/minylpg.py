@@ -46,7 +46,6 @@ class MinYLPG:
       self.clean_screen()
 
    def follower_alert(self, abonne):
-
       self.switch_mode()
 
       if len(abonne) < 20:
@@ -63,7 +62,7 @@ class MinYLPG:
       self.minitel.position(0, 0)
       self.minitel.efface(portee = 'vraimenttout')
       self.minitel.position(0, 0)
-      image = Image.open('images/ylpg.png')
+      image = Image.open('minylpg/images/ylpg.png')
       image = image.resize((80, 72), Image.NEAREST)
       image_minitel = ImageMinitel(self.minitel)
       image_minitel.importer(image)
@@ -87,7 +86,7 @@ class MinYLPG:
 
       sleep(5)
 
-      image = Image.open('images/ylpgwink1.png')
+      image = Image.open('minylpg/images/ylpgwink1.png')
       image = image.resize((20, 15), Image.NEAREST)
       image_minitel = ImageMinitel(self.minitel)
       image_minitel.importer(image)
@@ -95,7 +94,7 @@ class MinYLPG:
 
       sleep(1.5)
 
-      image = Image.open('images/ylpgwink0.png')
+      image = Image.open('minylpg/images/ylpgwink0.png')
       image = image.resize((20, 15), Image.NEAREST)
       image_minitel = ImageMinitel(self.minitel)
       image_minitel.importer(image)
