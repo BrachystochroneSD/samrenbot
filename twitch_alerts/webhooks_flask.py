@@ -12,5 +12,5 @@ def respond():
         new_follow = data['data'][0]['from_name']
         print("New follow: {}".format(new_follow))
         with open('follow_alert.txt', 'a') as follower_file:
-            follower_file.write("new_follow")
+            follower_file.write(new_follow)
         return Response(status=200)

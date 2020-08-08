@@ -2,7 +2,7 @@ import configparser
 
 import irc_class as ic
 import minylpg.minylpg as miny
-from twitch_alerts.webhooks_subs import Follow_Subscription
+import twitch_alerts.webhooks_subs as twas
 
 
 config = configparser.ConfigParser()
@@ -26,7 +26,8 @@ irc = ic.IRC()
 irc.connect(SERVER, PORT, CHANNEL, BOTNICK, BOTPASS)
 
 # Subscription to twitch follow alert
-follow_subs = Follow_Subscription(channel_id, client_id, callback_url, oauth_token)
+follow_subs = twas.Follow_Subscriptions(channel_id, client_id, callback_url, oauth_token)
+follow_subs.subscribe()
 
 # Minitel
 minylpg = miny.MinYLPG()
