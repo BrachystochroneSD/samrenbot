@@ -18,12 +18,14 @@ SERVER = config['IRC']['SERVER']
 
 irc=ic.IRC()
 irc.connect(SERVER, PORT, CHANNEL, BOTNICK, BOTPASS)
-follower_file = open('twitch_alerts/follow_alert.txt', 'r')
+follower_file = open('twitch_alerts/follow_alert.txt', 'w+')
 
 while True:
     text = irc.get_response()
+    user = text.split(":")[1].split("!")[0].capitalize()
+    message = text.split(":")[-1]
 
     if "PRIVMSG" in text:
-        print(text.split("PRIVMSG #")[1])
-    if "!hello" in text:
-        irc.send(CHANNEL, "Hello!")
+        print(user,":",message)
+    if "!hello" in message:
+        irc.send(CHANNEL, 'Hello {}!'.format(user))
