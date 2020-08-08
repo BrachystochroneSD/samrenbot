@@ -101,8 +101,4 @@ $RECYCLE.BIN/
 *.lnk
 
 #Custom
-recyclebin/
-Settings.cfg
-gui.dat
-gui.dat3
-setup.py
+config.ini
