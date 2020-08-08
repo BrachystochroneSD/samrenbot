@@ -18,11 +18,11 @@ class Follow_Subscriptions:
         payload = {
             "hub.mode" : "subscribe",
             "hub.topic" : "https://api.twitch.tv/helix/users/follows?first=1&to_id=" + self.channel_id,
-            "hub.callback" : self.callback_url
+            "hub.callback" : self.callback_url,
             "hub.lease_seconds": self.lease_seconds
         }
 
-        req = requests.post(url, headers = header, data = payload)
+        req = requests.post(self.url, headers = header, data = payload)
 
         print(req)
         print(req.text)
