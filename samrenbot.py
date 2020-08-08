@@ -34,7 +34,7 @@ minylpg = miny.MinYLPG()
 while True:
     text = irc.get_response()
     user = text.split(":")[1].split("!")[0].capitalize()
-    message = text.split(":")[-1]
+    message = text.split(":")[-1].rstrip()
 
     with open('twitch_alerts/follow_alert.txt', 'r+') as follower_file:
         file_lines = follower_file.readlines()
