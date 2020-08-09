@@ -28,7 +28,7 @@ class IRC:
         print("Joined!")
 
     def get_response(self):
-        time.sleep(1)
+        time.sleep(0.1)
         resp = self.irc.recv(2040).decode("UTF-8")
 
         if resp.find('PING') != -1:

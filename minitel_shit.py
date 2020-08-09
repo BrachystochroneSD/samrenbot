@@ -16,43 +16,49 @@ ws = obsws(host, port, password)
 # Minitel
 minylpg = miny.MinYLPG()
 
-while True:
+def follow_alert(name):
+    print("New follower:", name)
+    ws.connect()
+    current_scene = ws.call(requests.GetCurrentScene()).getName()
+    if current_scene == "game scene":
+        ws.call(requests.SetCurrentScene("abonnement"))
+        minylpg.follower_alert(name)
+        ws.call(requests.SetCurrentScene(current_scene))
+    else:
+        minylpg.follower_alert(name)
+    ws.disconnect()
+
+def delete_all_but_name(name):
     with open('twitch_alerts/follow_alert.txt', 'r+') as follower_file:
-        file_lines = follower_file.readlines()
+        lines = follower_file.readlines()
+        follower_file.seek(0)
+        for line in lines:
+            if line != name:
+                follower_file.write(line)
+        follower_file.truncate()
 
-        if len(file_lines) != 0:
-            name = file_lines[0]
-            print("New follower:", name)
-            if name != "":
-                ws.connect()
-                current_scene = ws.call(requests.GetCurrentScene()).getName()
-                if current_scene == "game scene":
-                    ws.call(requests.SetCurrentScene("abonnement"))
-                    minylpg.follower_alert(file_lines[0])
-                    ws.call(requests.SetCurrentScene(current_scene))
-                else:
-                    minylpg.follower_alert(file_lines[0])
-                ws.disconnect()
 
-            # Delete firt line
-            next_lines = follower_file.readlines()[1:]
-            follower_file.seek(0)
-            for i in next_lines:
-                follower_file.write(i)
-            follower_file.truncate()
+print("Ready!")
+while True:
+    with open('twitch_alerts/follow_alert.txt', 'r') as follower_file:
+        followers = follower_file.readlines()
+
+    if len(followers) != 0:
+        name = followers[0]
+        if name != "":
+            follow_alert(name)
+            delete_all_but_name(name)
+
 
     with open('chat_file.txt','r+') as chat_file:
-        file_lines = chat_file.readlines()
+        chat_lines = chat_file.readlines()
 
-        if len(file_lines) != 0:
-            line = file_lines[0]
-            minylpg.message(line)
+        if len(chat_lines) != 0:
+            for line in chat_lines:
+                minylpg.message(line)
 
-            # Delete firt line
-            next_lines = chat_file.readlines()[1:]
+            # Delete all line
             chat_file.seek(0)
-            for i in next_lines:
-                chat_file.write(i)
             chat_file.truncate()
 
     time.sleep(1)

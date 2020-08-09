@@ -34,7 +34,7 @@ class MinYLPG:
    def message(self, message):
       message_sans_accent = unidecode.unidecode(message)
       self.minitel.envoyer(message_sans_accent)
-      self.minitel.envoyer(10)
+      # self.minitel.envoyer(10)
       self.minitel.envoyer(13)
 
    def switch_mode(self):

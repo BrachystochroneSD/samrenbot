@@ -18,10 +18,6 @@ oauth_token = config['TwitchAlert']['oauth_token']
 channel_id = config['TwitchAlert']['channel_id']
 callback_url = config['TwitchAlert']['callback_url']
 
-host = config['OBS']['host']
-port = config['OBS']['port']
-password = config['OBS']['password']
-
 # IRC
 irc = ic.IRC()
 irc.connect(SERVER, PORT, CHANNEL, BOTNICK, BOTPASS)
@@ -33,7 +29,7 @@ follow_subs.subscribe()
 while True:
     text = irc.get_response()
     user = text.split(":")[1].split("!")[0].capitalize()
-    message = text.split(":")[-1].rstrip()
+    message = text.split(":")[-1]
 
     if "PRIVMSG" in text:
         print(user,":",message)
